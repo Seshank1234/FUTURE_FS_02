@@ -1,10 +1,10 @@
-Project Title: FUTURE_FS_2
+Project Title: 
 A CRM (Customer Relationship Management) Application for small businesses.
 
-🚀 About the Project
+About the Project
 FUTURE_FS_2 is a web-based CRM designed to help users track leads, manage customer interactions, and maintain a dashboard for business growth. This project was built to simplify the process of organizing customer data in one centralized location.
 
-🛠 Features
+Features
 User Login: Secure access to the dashboard.
 
 Lead Tracking: Easily add and manage potential customer information.
@@ -13,7 +13,7 @@ Interactive Dashboard: A clean, easy-to-use interface to view your business pipe
 
 Responsive Design: Accessible on desktop and mobile browsers.
 
-💻 Built With
+Built With
 Frontend: HTML5, CSS3, JavaScript
 
 Backend: Node.js, Express
