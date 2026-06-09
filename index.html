@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>CRM Masterpiece</title>
+    <style>
+        :root { --bg: #f3f4f6; --sidebar: #1e293b; --primary: #6366f1; --card: #ffffff; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); margin: 0; display: flex; min-height: 100vh; }
+        
+        .sidebar { width: 240px; background: var(--sidebar); color: white; margin: 20px; border-radius: 20px; padding: 30px; }
+        .content { flex: 1; padding: 40px; }
+        .card { background: var(--card); padding: 25px; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        
+        .form-header { color: var(--primary); font-weight: 700; margin-bottom: 15px; text-transform: uppercase; font-size: 0.9rem; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { padding: 15px; text-align: left; color: white; font-size: 0.8rem; }
+        th:nth-child(1) { background: #6366f1; border-top-left-radius: 10px; }
+        th:nth-child(2) { background: #8b5cf6; }
+        th:nth-child(3) { background: #a855f7; }
+        th:nth-child(4) { background: #d946ef; }
+        th:nth-child(5) { background: #ec4899; }
+        th:nth-child(6) { background: #f43f5e; border-top-right-radius: 10px; }
+        
+        td { padding: 15px; border-bottom: 1px solid #f1f5f9; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 10px; box-sizing: border-box; }
+        
+        .btn-add { background: var(--primary); color: white; padding: 12px 25px; border-radius: 10px; border: none; cursor: pointer; transition: 0.3s; }
+        .btn-add:hover { background: #4f46e5; }
+        
+        /* Status Badge Colors */
+        .status-badge { padding: 5px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+        .status-New { background: #e0e7ff; color: #4338ca; }
+        .status-Contacted { background: #fef3c7; color: #b45309; }
+        .status-Converted { background: #dcfce7; color: #15803d; }
+        
+        .btn-action { padding: 6px 12px; border-radius: 6px; border: none; cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: 0.2s; }
+        .btn-edit { background: #e2e8f0; color: #475569; margin-right: 8px; }
+        .btn-edit:hover { background: #cbd5e1; }
+        .btn-del { background: #fee2e2; color: #b91c1c; }
+        .btn-del:hover { background: #fecaca; }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>CRM SYSTEM</h2>
+    <p style="opacity:0.7; font-size: 0.8rem;">Lead Management Dashboard</p>
+    <button onclick="logout()" style="margin-top:20px; cursor:pointer;">Logout</button>
+</div>
+
+<div class="content">
+    <div class="card">
+        <h3>About this CRM</h3>
+        <p style="color:#64748b;">A professional workspace to track your sales pipeline.</p>
+    </div>
+
+    <div class="card">
+        <div class="form-header">Add New Lead Data</div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <input type="text" id="name" placeholder="Full Name">
+            <input type="email" id="email" placeholder="Email">
+            <input type="text" id="source" placeholder="Source">
+            <select id="status"><option value="New">New</option><option value="Contacted">Contacted</option><option value="Converted">Converted</option></select>
+        </div>
+        <textarea id="notes" placeholder="Add follow-up notes..."></textarea>
+        <button class="btn-add" onclick="addLead()">+ Add Lead</button>
+    </div>
+
+    <div class="card">
+        <input type="text" id="searchInput" placeholder="🔍 Search leads..." onkeyup="searchLeads()">
+        <table>
+            <thead>
+                <tr><th>NAME</th><th>EMAIL</th><th>SOURCE</th><th>STATUS</th><th>NOTES</th><th>ACTIONS</th></tr>
+            </thead>
+            <tbody id="leadTableBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // 1. SECURITY: Force login check
+    if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = 'login.html';
+    }
+
+    function logout() { 
+        sessionStorage.removeItem('isLoggedIn'); 
+        window.location.href = 'login.html'; 
+    }
+
+    // 2. LOAD LEADS with Status Badges
+    async function loadLeads() {
+        const res = await fetch('http://localhost:5000/leads');
+        const leads = await res.json();
+        document.getElementById('leadTableBody').innerHTML = leads.map(l => `<tr>
+            <td>${l.name}</td><td>${l.email}</td><td>${l.source}</td>
+            <td><span class="status-badge status-${l.status}">${l.status}</span></td>
+            <td>${l.notes}</td>
+            <td>
+                <button class="btn-action btn-edit" onclick="editLead(${l.id}, '${l.notes}')">Edit</button> 
+                <button class="btn-action btn-del" onclick="deleteLead(${l.id})">X</button>
+            </td>
+        </tr>`).join('');
+    }
+
+    async function addLead() {
+        const data = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            source: document.getElementById('source').value,
+            status: document.getElementById('status').value,
+            notes: document.getElementById('notes').value
+        };
+        await fetch('http://localhost:5000/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        loadLeads();
+    }
+
+    async function deleteLead(id) {
+        await fetch(`http://localhost:5000/delete/${id}`, { method: 'DELETE' });
+        loadLeads();
+    }
+
+    async function editLead(id, oldNotes) {
+        const newStatus = prompt("Enter Status (New / Contacted / Converted):");
+        const newNotes = prompt("Update Notes:", oldNotes);
+        if (newStatus) {
+            await fetch(`http://localhost:5000/update/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus, notes: newNotes })
+            });
+            loadLeads();
+        }
+    }
+
+    function searchLeads() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const rows = document.getElementById('leadTableBody').getElementsByTagName('tr');
+        for (let row of rows) {
+            row.style.display = row.innerText.toLowerCase().includes(input) ? "" : "none";
+        }
+    }
+
+    window.onload = loadLeads;
+</script>
+</body>
+</html>

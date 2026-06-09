@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background: #f3f4f6; 
+            margin: 0;
+        }
+        .login-box { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); 
+            width: 300px; 
+            text-align: center;
+        }
+        h2 { color: #1e293b; margin-bottom: 20px; }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 10px; 
+            box-sizing: border-box; 
+        }
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background: #6366f1; 
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        button:hover { background: #4f46e5; }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>Admin Access</h2>
+        <input type="password" id="pass" placeholder="Enter Admin Password">
+        <button onclick="checkPass()">Login</button>
+    </div>
+
+    <script>
+        function checkPass() {
+            const password = document.getElementById('pass').value;
+            
+            // Password Check
+            if (password === "future") {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.html';
+            } else {
+                alert("Incorrect Password. Please try again.");
+            }
+        }
+
+        // Allow pressing "Enter" key to login
+        document.getElementById("pass").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPass();
+            }
+        });
+    </script>
+</body>
+</html>
