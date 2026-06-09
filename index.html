@@ -92,7 +92,7 @@
 
     // 2. LOAD LEADS with Status Badges
     async function loadLeads() {
-        const res = await fetch('http://localhost:5000/leads');
+       const res = await fetch('https://future-fs-02-ljbx.onrender.com/leads');
         const leads = await res.json();
         document.getElementById('leadTableBody').innerHTML = leads.map(l => `<tr>
             <td>${l.name}</td><td>${l.email}</td><td>${l.source}</td>
@@ -113,7 +113,7 @@
             status: document.getElementById('status').value,
             notes: document.getElementById('notes').value
         };
-        await fetch('http://localhost:5000/add', {
+      await fetch('https://future-fs-02-ljbx.onrender.com/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -122,7 +122,7 @@
     }
 
     async function deleteLead(id) {
-        await fetch(`http://localhost:5000/delete/${id}`, { method: 'DELETE' });
+      await fetch(`https://future-fs-02-ljbx.onrender.com/delete/${id}`, { method: 'DELETE' });
         loadLeads();
     }
 
@@ -130,7 +130,7 @@
         const newStatus = prompt("Enter Status (New / Contacted / Converted):");
         const newNotes = prompt("Update Notes:", oldNotes);
         if (newStatus) {
-            await fetch(`http://localhost:5000/update/${id}`, {
+           await fetch(`https://future-fs-02-ljbx.onrender.com/update/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus, notes: newNotes })
