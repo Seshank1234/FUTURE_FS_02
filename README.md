@@ -23,7 +23,7 @@ To get this project running on your local machine, follow these steps:
 
 Clone the repository:
 Bash
-git clone https://github.com/YOUR_USERNAME/FUTURE_FS_2.git
+git clone https://github.com/Seshank1234/FUTURE_FS_2.git
 
 Install dependencies:
 Bash
