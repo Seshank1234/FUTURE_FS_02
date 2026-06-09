@@ -1,14 +1,38 @@
-# FUTURE_FS_2
+Project Title: FUTURE_FS_2
+A CRM (Customer Relationship Management) Application for small businesses.
 
-A CRM Masterpiece designed to track sales pipelines and manage lead statuses efficiently.
+🚀 About the Project
+FUTURE_FS_2 is a web-based CRM designed to help users track leads, manage customer interactions, and maintain a dashboard for business growth. This project was built to simplify the process of organizing customer data in one centralized location.
 
-## Features
-- **Secure Login:** Password-protected access.
-- **Lead Management:** Add, delete, and update lead information.
-- **Status Tracking:** Color-coded badges for 'New', 'Contacted', and 'Converted' leads.
-- **Searchable:** Filter through leads in real-time.
+🛠 Features
+User Login: Secure access to the dashboard.
 
-## Getting Started
-1. Clone the repository.
-2. Ensure you have a backend server running on `http://localhost:5000`.
-3. Open `index.html` in your browser.
+Lead Tracking: Easily add and manage potential customer information.
+
+Interactive Dashboard: A clean, easy-to-use interface to view your business pipeline.
+
+Responsive Design: Accessible on desktop and mobile browsers.
+
+💻 Built With
+Frontend: HTML5, CSS3, JavaScript
+
+Backend: Node.js, Express
+
+Version Control: Git & GitHub
+To get this project running on your local machine, follow these steps:
+
+Clone the repository:
+Bash
+git clone https://github.com/YOUR_USERNAME/FUTURE_FS_2.git
+
+Install dependencies:
+Bash
+npm install
+
+Run the server:
+Bash
+node index.js
+Open in browser: Visit http://localhost:5000 (or your chosen port).
+
+License
+This project is open-source and available under the MIT License.
