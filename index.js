@@ -7,12 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'seshank',
-  database: 'crm_db'
-});
+const db = mysql.createConnection(process.env.DATABASE_URL);
 
 // GET all leads
 app.get('/leads', (req, res) => {
