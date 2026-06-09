@@ -2,7 +2,7 @@ Project Title:
 A CRM (Client Lead Management System) Application (Mini CRM)
 
 About the Project
-CRM is a web-based CRM designed to help users track leads, manage customer interactions, and maintain a dashboard for business growth. This project was built to simplify the process of organizing customer data in one centralized location.
+CRM is a web-based CRM designed to help users track leads, manage customer interactions, and maintain a dashboard for business growth. This project was built to simplify the process of organizing customer data in one centralized location. [My Website PASSWORD IS:future]
 
 Features
 User Login: Secure access to the dashboard.
@@ -32,8 +32,6 @@ npm install
 Run the server:
 Bash
 node index.js
-Open in browser: Visit future-fs-02-orcin-delta.vercel.app
-
 
 License
 This project is open-source and available under the MIT License. 
