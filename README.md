@@ -32,7 +32,8 @@ npm install
 Run the server:
 Bash
 node index.js
-Open in browser: Visit http://localhost:5000 (or your chosen port).
+Open in browser: Visit future-fs-02-orcin-delta.vercel.app
+
 
 License
-This project is open-source and available under the MIT License. updated
+This project is open-source and available under the MIT License. 
