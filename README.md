@@ -1,8 +1,8 @@
 Project Title: 
-A CRM (Customer Relationship Management) Application for small businesses.
+A CRM (Client Lead Management System) Application (Mini CRM)
 
 About the Project
-FUTURE_FS_2 is a web-based CRM designed to help users track leads, manage customer interactions, and maintain a dashboard for business growth. This project was built to simplify the process of organizing customer data in one centralized location.
+CRM is a web-based CRM designed to help users track leads, manage customer interactions, and maintain a dashboard for business growth. This project was built to simplify the process of organizing customer data in one centralized location.
 
 Features
 User Login: Secure access to the dashboard.
