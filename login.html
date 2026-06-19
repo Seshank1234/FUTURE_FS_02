@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRM Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0f172a; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .login-card { background: #1e293b; padding: 40px; border-radius: 16px; width: 300px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #6366f1; border: none; color: white; border-radius: 8px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h3>CRM Login</h3>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button id="loginBtn">Login</button>
+    </div>
+
+<script>
+    // REPLACE THIS IN login.html
+const myCRM = window.supabase.createClient(
+    'https://ifujxrvbgltilyrdezlh.supabase.co', 
+    'sb_publishable_uN4x9Rl2K7jOprK4QWHkjQ_hYZSr4kK'
+);
+
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const { error } = await myCRM.auth.signInWithPassword({ email, password });
+        if (error) alert(error.message);
+        else window.location.href = 'index.html';
+    });
+</script>
+</body>
+</html>
